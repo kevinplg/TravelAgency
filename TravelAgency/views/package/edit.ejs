@@ -1,0 +1,46 @@
+<% layout('layouts/boilerplate') %>
+    <div class="row">
+        <h1 class="text-center">Edit Package</h1>
+        <div class="col-md-6 offset-md-3">
+            <form action="/package/<%=package._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <input class="form-control" type="text" id="title" name="package[title]" value="<%=package.title %>" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Location</label>
+                    <input class="form-control" type="text" id="location" name="package[location]" value="<%=package.location %>" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="price">Package Price</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="price-label">$</span>
+                        <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price" aria-describedby="price-label" name="package[price]" value="<%=package.price %>" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control" type="text" id="description" name="package[description]" required><%= package.description%></textarea>
+                </div>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="image">Add image(s)</label>
+                    <input type="file" class="form-control" id="image" name="image" multiple>
+                </div>
+                <div class="mb-3">
+                    <% package.images.forEach(function(img, i) {  %>
+                        <img src="<%=img.thumbnail %>" class="img-thumbnail" alt="">
+                        <div class="form-check-inline">
+                            <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+                        </div>
+                        <label for="image-<%=i%>">Delete?</label>
+                        <% })%>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-info">Update package</button>
+                </div>
+            </form>
+            <a href="/package/<%= package._id%>">Back To Package</a>
+
+        </div>
+    </div>

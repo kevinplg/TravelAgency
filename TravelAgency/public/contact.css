@@ -1,0 +1,68 @@
+.contact-body {
+    background-image: url(img/contact-page-hawaii.jpg);
+    height: 100%;
+}
+
+
+.logo {
+    height: auto;
+    width: 100px;
+    position: absolute;
+    border-radius: 50%;
+    -webkit-transition: -webkit-transform 1s ease-in-out;
+            transition:         transform 1s ease-in-out;
+  }
+  .logo:hover {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+
+.banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-us-heading {
+    font-family: cursive;
+    font-weight: 600;
+    font-size: 3.5em;
+}
+
+.coconut {
+    width: auto;
+    height: 2.5em;
+    margin: 20px;
+}
+
+.offices-container {
+    display: flex;
+
+    justify-content: space-around;
+    margin-top: 100px;
+}
+
+.beijing-office-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.calgary-office-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.hawaii-office-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.justified-img {
+    height : 191px;
+}
+
+
+
+
+

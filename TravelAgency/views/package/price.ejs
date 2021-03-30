@@ -1,0 +1,77 @@
+<% layout('layouts/boilerplate') %>
+    <div class="row">
+        <h1 class="text-center">
+            <%= package.title%> Package</h1>
+        <div class="col-md-6 offset-md-3">
+            <div class="mb-3">
+                <li class="list-group-item">Departing from: Calgary
+            </div>
+            <div class="mb-3">
+                <li class="list-group-item">Going to:
+                    <%= package.location%>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="departingOn">Departing on:</label>
+                <div class="input-group">
+                    <input type="date" class="form-control" id="departingOn" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="goingFor">Return:</label>
+                <div class="input-group">
+                    <input type="date" class="form-control" id="goingFor" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="adults">Adults (18+ yrs):</label>
+                <div class="input-group">
+                    <select id="adults" class="form-select" aria-label="adults">
+                        <option selected value='0'>0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                      </select>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="children">Children (0-17 yrs):</label>
+                <div class="input-group">
+                    <select id="children" class="form-select" aria-label="children">
+                        <option selected value='0'>0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                      </select>
+                </div>
+            </div>
+            <button class="btn btn-danger" onclick="calculate()">Calculate</button>
+
+            <h3></h3>
+            <h3 id='answer'></h3>
+
+            <a class="card-link btn btn-info" href="/package/booking">Booking</a>
+        </div>
+
+        <script>
+            function calculate() {
+                const adults = document.getElementById("adults").value;
+                const children = document.getElementById("children").value;
+                const departingOn = new Date(document.getElementById("departingOn").value);
+                const goingFor = new Date(document.getElementById("goingFor").value);
+                const totalDays = (goingFor - departingOn) / (1000 * 3600 * 24);
+                const totalPrice = <%= package.price%> * (parseFloat(adults) + 0.8 * parseFloat(children)) * totalDays;
+
+                const formatter = new Intl.NumberFormat('en-Us', {
+                    style: "currency",
+                    currency: "usd"
+                })
+                if (!isNaN(totalPrice)) {
+                    document.getElementById('answer').innerHTML = "The total calculated price is: " +
+                        formatter.format(totalPrice)
+                }
+            }
+        </script>
